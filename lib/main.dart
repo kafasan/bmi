@@ -25,12 +25,12 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         scaffoldBackgroundColor: primaryColor,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: primaryColor
         ),
         primarySwatch: Colors.blue,
       ),
-      home: BmiDataScreen()
+      home: const BmiDataScreen()
     );
   }
 }
