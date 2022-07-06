@@ -4,6 +4,7 @@ import 'package:bmi/views/bmi_result_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BmiDataScreen extends StatefulWidget {
   const BmiDataScreen({Key? key}) : super(key: key);
@@ -27,6 +28,35 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
       ));
     }
     return weights;
+  }
+
+  void loadAllBmiData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      height = (prefs.getInt('height') ?? height);
+      weight = (prefs.getInt('weight') ?? weight);
+      age = (prefs.getInt('age') ?? age);
+    });
+  }
+
+  loadOneBmiData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return int
+    int? intValue = prefs.getInt('weight');
+    return intValue;
+  }
+
+  void saveBmiData(String key, int value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setInt(key, value);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadAllBmiData();
   }
 
   @override
@@ -117,7 +147,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
             ]),
           ),
           Expanded(
-            child: BmiCardOne(
+            child: BmiCard(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -139,46 +169,44 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             margin: EdgeInsets.only(left: 6),
                             width: 24,
                             height: 24,
-                            child: Icon(
+                            child: const Icon(
                               Icons.navigate_before,
                               color: Colors.grey,
                             ),
                           ),
-                          Container(
-                            //padding: EdgeInsets.symmetric(vertical: 5),
-                            child: NumberPicker(
-                              value: height,
-                              minValue: 80,
-                              maxValue: 240,
-                              step: 1,
-                              itemHeight: 100,
-                              axis: Axis.horizontal,
-                              onChanged: (value) {
-                                setState(() {
-                                  height = value;
-                                });
-                              },
-                              // decoration: BoxDecoration(
-                              //   border: Border(
-                              //     left: BorderSide(
-                              //       color: secondaryColor,
-                              //     ),
-                              //     right: BorderSide(
-                              //       color: secondaryColor,
-                              //     ),
-                              //   ),
-                              // ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: secondaryColor),
-                              ),
+                          NumberPicker(
+                            value: height,
+                            minValue: 80,
+                            maxValue: 240,
+                            step: 1,
+                            itemHeight: 100,
+                            axis: Axis.horizontal,
+                            onChanged: (value) {
+                              setState(() {
+                                height = value;
+                                saveBmiData('height', height);
+                              });
+                            },
+                            // decoration: BoxDecoration(
+                            //   border: Border(
+                            //     left: BorderSide(
+                            //       color: secondaryColor,
+                            //     ),
+                            //     right: BorderSide(
+                            //       color: secondaryColor,
+                            //     ),
+                            //   ),
+                            // ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: secondaryColor),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(right: 6),
+                            margin: const EdgeInsets.only(right: 6),
                             width: 24,
                             height: 24,
-                            child: Icon(
+                            child: const Icon(
                               Icons.navigate_next,
                               color: Colors.grey,
                             ),
@@ -186,17 +214,6 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                         ],
                       ),
                     ),
-                    // Slider(
-                    //   value: height.toDouble(),
-                    //   min: 80,
-                    //   max: 200,
-                    //   thumbColor: Colors.red,
-                    //   activeColor: Colors.white,
-                    //   onChanged: (value) {
-                    //     height = value.toInt();
-                    //     setState(() {});
-                    //   },
-                    // )
                   ],
                 ),
               ),
@@ -219,13 +236,14 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       Container(
                         height: MediaQuery.of(context).size.height * 0.15,
                         child: CupertinoPicker(
-                            scrollController: FixedExtentScrollController(
-                                initialItem: weight - 20),
                             itemExtent: 25,
                             magnification: 2,
                             useMagnifier: true,
+                            scrollController: FixedExtentScrollController(
+                                initialItem: weight - 20),
                             onSelectedItemChanged: (val) {
                               weight = val + 20;
+                              saveBmiData('weight', weight);
                             },
                             children: generateWeight(20, 220)),
                       )
@@ -255,8 +273,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           children: [
                             RawMaterialButton(
                               onPressed: () {
-                                age--;
-                                setState(() {});
+                                if (age <= 0) {
+                                  age = 0;
+                                } else {
+                                  age--;
+                                }
+                                // setState(() {});
+                                saveBmiData("age", age);
                               },
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -275,7 +298,8 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             RawMaterialButton(
                               onPressed: () {
                                 age++;
-                                setState(() {});
+                                // setState(() {});
+                                saveBmiData("age", age);
                               },
                               elevation: 0,
                               shape: RoundedRectangleBorder(
