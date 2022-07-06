@@ -93,7 +93,7 @@ class BmiResultScreen extends StatelessWidget {
                   BoxShadow(
                     color: Color(0xffcfd8dc),
                     blurRadius: 4,
-                    offset: Offset(4, 8), // Shadow position
+                    offset: Offset(4, 8),
                   ),
                 ],
               ),

@@ -28,6 +28,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           style: TextStyle(
             color: (weight == i) ? secondaryColor : textDefaultColor,
             fontSize: (weight == i) ? 24 : 18,
+            fontWeight: (weight == i) ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ));
@@ -96,7 +97,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           (gender == "male")
                               ? "assets/images/icon_male_active.png"
                               : "assets/images/icon_male_inactive.png",
-                          fit: BoxFit.cover,
+                          // fit: BoxFit.cover,
                         ),
                         Positioned(
                           top: 10,
@@ -131,7 +132,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           (gender == "female")
                               ? "assets/images/icon_female_active.png"
                               : "assets/images/icon_female_inactive.png",
-                          fit: BoxFit.cover,
+                          // fit: BoxFit.cover,
                         ),
                         Positioned(
                           top: 10,
