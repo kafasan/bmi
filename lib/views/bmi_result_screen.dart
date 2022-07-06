@@ -89,6 +89,13 @@ class BmiResultScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: secondaryColor,
                 borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xffcfd8dc),
+                    blurRadius: 4,
+                    offset: Offset(4, 8), // Shadow position
+                  ),
+                ],
               ),
               child: const Center(
                 child: Text(
