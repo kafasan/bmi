@@ -22,9 +22,14 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
   List<Widget> generateWeight(start, end) {
     List<Widget> weights = [];
     for (var i = start; i < end; i++) {
-      weights.add(Text(
-        "$i",
-        style: labelTextStyle.copyWith(fontSize: 20),
+      weights.add(Center(
+        child: Text(
+          "$i",
+          style: TextStyle(
+            color: (weight == i) ? secondaryColor : textDefaultColor,
+            fontSize: (weight == i) ? 24 : 18,
+          ),
+        ),
       ));
     }
     return weights;
@@ -68,7 +73,8 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           centerTitle: true,
           title: const Text(
             "BMI Calculator",
-            style: TextStyle(color: textDefaultColor),
+            style:
+                TextStyle(color: textDefaultColor, fontWeight: FontWeight.bold),
           ),
         ),
         body: Column(children: [
@@ -155,7 +161,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                     Text(
                       "Height (cm)",
                       style: labelTextStyle.copyWith(
-                        fontSize: 14,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -181,6 +187,15 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             step: 1,
                             itemHeight: 100,
                             axis: Axis.horizontal,
+                            textStyle: TextStyle(
+                              fontSize: 24,
+                              color: textDefaultColor,
+                            ),
+                            selectedTextStyle: TextStyle(
+                              fontSize: 45,
+                              color: secondaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                             onChanged: (value) {
                               setState(() {
                                 height = value;
@@ -229,23 +244,25 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       Text(
                         "Weight (kg)",
                         style: labelTextStyle.copyWith(
-                          fontSize: 14,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      SizedBox(height: 6),
                       Container(
                         height: MediaQuery.of(context).size.height * 0.15,
                         child: CupertinoPicker(
-                            itemExtent: 25,
-                            magnification: 2,
-                            useMagnifier: true,
-                            scrollController: FixedExtentScrollController(
-                                initialItem: weight - 20),
-                            onSelectedItemChanged: (val) {
-                              weight = val + 20;
-                              saveBmiData('weight', weight);
-                            },
-                            children: generateWeight(20, 220)),
+                          itemExtent: 25,
+                          magnification: 2,
+                          useMagnifier: true,
+                          scrollController: FixedExtentScrollController(
+                              initialItem: weight - 20),
+                          onSelectedItemChanged: (val) {
+                            weight = val + 20;
+                            saveBmiData('weight', weight);
+                          },
+                          children: generateWeight(20, 220),
+                        ),
                       )
                     ],
                   ),
@@ -259,7 +276,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       Text(
                         "Age",
                         style: labelTextStyle.copyWith(
-                          fontSize: 14,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -273,9 +290,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           children: [
                             RawMaterialButton(
                               onPressed: () {
-                                if (age <= 0) {
-                                  age = 0;
-                                } else {
+                                if (age > 0) {
                                   age--;
                                 }
                                 // setState(() {});

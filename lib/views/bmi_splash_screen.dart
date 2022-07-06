@@ -14,7 +14,7 @@ class _BmiSplashScreen extends State<BmiSplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 2),
+      Duration(seconds: 5),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(

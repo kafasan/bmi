@@ -19,7 +19,8 @@ class BmiResultScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           "BMI Result",
-          style: TextStyle(color: textDefaultColor),
+          style:
+              TextStyle(color: textDefaultColor, fontWeight: FontWeight.bold),
         ),
         iconTheme: const IconThemeData(
           color: iconDefaultColor,
@@ -40,37 +41,42 @@ class BmiResultScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 5,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      bmiCalculator.bmiCategory ?? "",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: textDefaultColor,
-                      ),
+            child: Center(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Column(children: [
+                  Text(
+                    bmi.toStringAsFixed(1),
+                    style: const TextStyle(
+                      fontSize: 70,
+                      fontWeight: FontWeight.bold,
+                      color: secondaryColor,
                     ),
-                    Text(
-                      bmi.toStringAsFixed(1),
-                      style: const TextStyle(
-                        fontSize: 70,
-                        fontWeight: FontWeight.bold,
-                        color: secondaryColor,
-                      ),
+                  ),
+                  Divider(
+                    height: 30,
+                    thickness: 2,
+                    color: secondaryColor,
+                  ),
+                  Text(
+                    bmiCalculator.bmiCategory ?? "",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: textDefaultColor,
                     ),
-                    Text(
-                      bmiCalculator.bmiDescription ?? "",
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: textDefaultColor,
-                      ),
-                      textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    bmiCalculator.bmiDescription ?? "",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: textDefaultColor,
                     ),
-                  ]),
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+              ),
             ),
           ),
           GestureDetector(
