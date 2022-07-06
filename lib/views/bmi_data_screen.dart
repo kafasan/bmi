@@ -279,7 +279,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   age--;
                                 }
                                 // setState(() {});
-                                saveBmiData("age", age);
+                                saveBmiData('age', age);
                               },
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -299,7 +299,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                               onPressed: () {
                                 age++;
                                 // setState(() {});
-                                saveBmiData("age", age);
+                                saveBmiData('age', age);
                               },
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -338,7 +338,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
             },
             child: Container(
               height: 50,
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               // color: const Color(0xffec3c66),
               decoration: BoxDecoration(
                 color: secondaryColor,

@@ -1,5 +1,6 @@
 import 'package:bmi/constants/constant.dart';
 import 'package:bmi/views/bmi_data_screen.dart';
+import 'package:bmi/views/bmi_splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Body Mass Index',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const BmiDataScreen()
+      home: BmiSplashScreen()
     );
   }
 }

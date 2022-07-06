@@ -1,6 +1,5 @@
 import 'package:bmi/constants/constant.dart';
 import 'package:bmi/helper/bmi_calulator.dart';
-import 'package:bmi/views/bmi_data_screen.dart';
 import 'package:flutter/material.dart';
 
 class BmiResultScreen extends StatelessWidget {
@@ -22,7 +21,7 @@ class BmiResultScreen extends StatelessWidget {
           "BMI Result",
           style: TextStyle(color: textDefaultColor),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: iconDefaultColor,
         ),
       ),
@@ -80,7 +79,7 @@ class BmiResultScreen extends StatelessWidget {
             },
             child: Container(
               height: 50,
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: secondaryColor,
                 borderRadius: BorderRadius.circular(15),
